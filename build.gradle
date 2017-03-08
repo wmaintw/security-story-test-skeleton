@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+project.ext {
+    cucumberVersion = '1.2.5'
+    junitVersion = '4.12'
+}
+
+dependencies {
+    testCompile(
+            'info.cukes:cucumber-java:' + cucumberVersion,
+            'info.cukes:cucumber-junit:' + cucumberVersion,
+            'junit:junit:' + junitVersion,
+            'org.apache.httpcomponents:fluent-hc:4.5.3',
+            'org.hamcrest:hamcrest-all:1.3',
+            'org.apache.commons:commons-lang3:3.5'
+    )
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
